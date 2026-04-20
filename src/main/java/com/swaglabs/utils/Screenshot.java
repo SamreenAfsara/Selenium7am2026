@@ -13,24 +13,11 @@ import java.util.Date;
 public class Screenshot {
 
 	
-	public static void takePicture(WebDriver driver) throws IOException {
-
-        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String filepath = ".//screenshots//" + timestamp + ".png";
-
-        TakesScreenshot ts = (TakesScreenshot) driver;
-        File image = ts.getScreenshotAs(OutputType.FILE);
-
-        File destFile = new File(filepath);
-        FileUtils.copyFile(image, destFile);
-
-       
-        attachScreenshot(destFile);
-    }
-
-    @Attachment(value = "Step Screenshot", type = "image/png")
-    public static byte[] attachScreenshot(File file) throws IOException {
-        return Files.readAllBytes(file.toPath());
+	
+        @Attachment(value = "Step Screenshot", type = "image/png")
+        public static byte[] takePicture(WebDriver driver) {
+            return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+        }
     }
 	
-}
+
