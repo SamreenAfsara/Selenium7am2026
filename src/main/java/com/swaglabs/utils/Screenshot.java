@@ -1,6 +1,8 @@
 package com.swaglabs.utils;
 
 import io.qameta.allure.Attachment;
+import io.qameta.allure.Step;
+
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 
@@ -14,10 +16,11 @@ public class Screenshot {
 
 	
 	
-        @Attachment(value = "Step Screenshot", type = "image/png")
-        public static byte[] takePicture(WebDriver driver) {
-            return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
-        }
+	 @Step("Capture screenshot")
+	    @Attachment(value = "Step Screenshot", type = "image/png")
+	    public static byte[] takePicture(WebDriver driver) {
+	        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+	    }
     }
 	
 

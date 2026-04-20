@@ -8,6 +8,7 @@ import com.swaglabs.utils.ReadData;
 import com.swaglabs.utils.Screenshot;
 
 import io.qameta.allure.Allure;
+import io.qameta.allure.Step;
 
 import java.io.IOException;
 import java.util.List;
@@ -19,6 +20,7 @@ public class LoginpageTest extends Browser {
 
 	public int n=1;
 	
+	@Step("Launch browser")
 	@Parameters({"browsername"})
 	@BeforeMethod
 	public void setup(@Optional("chrome")String bname) throws IOException
@@ -56,10 +58,10 @@ public class LoginpageTest extends Browser {
 		String uname=readData.getData(1, 0);
 		Loginpage loginpage= new Loginpage(driver,"loginpage");
 		loginpage.enterUsername(uname);
-		Screenshot.takePicture(driver);
+	
 
 		loginpage.clickonLoginbtn();
-		Screenshot.takePicture(driver);
+		
 
 		String actualmsg=loginpage.getErrorMsg();
 		System.out.println(actualmsg);
@@ -74,13 +76,12 @@ public class LoginpageTest extends Browser {
 		List<String>testdata=readData.getData(8);
 		Loginpage loginpage= new Loginpage(driver,"loginpage");
 		loginpage.enterUsername(testdata.get(0));
-		Screenshot.takePicture(driver);
 
 		loginpage.enterPassword(testdata.get(1));
-		Screenshot.takePicture(driver);
+		
 
 		loginpage.clickonLoginbtn();
-		Screenshot.takePicture(driver);
+		
 
 		String actualmsg=loginpage.getErrorMsg();
 		System.out.println(actualmsg);
@@ -95,13 +96,12 @@ public class LoginpageTest extends Browser {
 		List<String>testdata=readData.getData(2);
 		Loginpage loginpage= new Loginpage(driver,"loginpage");
 		loginpage.enterUsername(testdata.get(1));
-		Screenshot.takePicture(driver);
+		
 
 		loginpage.enterPassword(testdata.get(2));
-		Screenshot.takePicture(driver);
-
+		
 		loginpage.clickonLoginbtn();
-		Screenshot.takePicture(driver);
+		
 
 		
 		InventoryPage inventoryPage = new InventoryPage(driver,"inventory");
