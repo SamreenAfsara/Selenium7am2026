@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import com.swaglabs.utils.Screenshot;
 import com.swaglabs.utils.SmartFunctions;
 
+import io.qameta.allure.Allure;
 import io.qameta.allure.Step;
 
 public class InventoryPage extends SmartFunctions {
@@ -15,9 +16,10 @@ public class InventoryPage extends SmartFunctions {
 		this.driver=driver;
 	}
 	
-	@Step("checking title is visible")
+	
 	public boolean isProductTitleVisible()
 	{
+		Allure.step("Product title visible");
 	    Screenshot.takePicture(driver);
 		return isVisible("productTitle");
 	}
