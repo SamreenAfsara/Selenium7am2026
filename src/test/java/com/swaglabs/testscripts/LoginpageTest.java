@@ -19,7 +19,7 @@ public class LoginpageTest extends Browser {
 	
 	@Parameters({"browsername"})
 	@BeforeMethod
-	public void setup(String bname)
+	public void setup(@Optional("chrome")String bname)
 	{
 		launchBrowser(bname);
 		openURL();
@@ -119,3 +119,15 @@ public class LoginpageTest extends Browser {
 		return readData.getData();
 	}
 }
+
+/*
+ 
+ download and install git in local system
+ 
+ Configure git:
+ 
+ git config --global user.name="yourname"
+  git config --global user.email="emailid"
+ 
+ */
+
