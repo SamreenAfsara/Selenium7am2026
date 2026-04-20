@@ -5,9 +5,11 @@ import com.swaglabs.pages.Loginpage;
 import com.swaglabs.utils.Browser;
 import com.swaglabs.utils.DataConfig;
 import com.swaglabs.utils.ReadData;
+import com.swaglabs.utils.Screenshot;
 
 import io.qameta.allure.Allure;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Random;
 
@@ -19,24 +21,28 @@ public class LoginpageTest extends Browser {
 	
 	@Parameters({"browsername"})
 	@BeforeMethod
-	public void setup(@Optional("chrome")String bname)
+	public void setup(@Optional("chrome")String bname) throws IOException
 	{
 		launchBrowser(bname);
 		openURL();
+		Screenshot.takePicture(driver);
 	}
 	
 	@AfterMethod
-	public void teardown()
+	public void teardown() throws IOException
 	{
 		closeBrowser();
+
 	}
 	
 	
 	@Test
-	public void verifyLoginBtnFunctionalityWithBlankUsernameAndPassword() throws InterruptedException
+	public void verifyLoginBtnFunctionalityWithBlankUsernameAndPassword() throws InterruptedException, IOException
 	{
 		Loginpage loginpage= new Loginpage(driver,"loginpage");
 		loginpage.clickonLoginbtn();
+		Screenshot.takePicture(driver);
+
 		String actualmsg=loginpage.getErrorMsg();
 		System.out.println(actualmsg);
 		Thread.sleep(10000);
@@ -44,13 +50,17 @@ public class LoginpageTest extends Browser {
 	}
 	
 	@Test
-	public void verifyLoginBtnFunctionalityWithBlankPassword() throws InterruptedException
+	public void verifyLoginBtnFunctionalityWithBlankPassword() throws InterruptedException, IOException
 	{
 		ReadData readData = new ReadData("loginpage");
 		String uname=readData.getData(1, 0);
 		Loginpage loginpage= new Loginpage(driver,"loginpage");
 		loginpage.enterUsername(uname);
+		Screenshot.takePicture(driver);
+
 		loginpage.clickonLoginbtn();
+		Screenshot.takePicture(driver);
+
 		String actualmsg=loginpage.getErrorMsg();
 		System.out.println(actualmsg);
 		//Thread.sleep(10000);
@@ -58,14 +68,20 @@ public class LoginpageTest extends Browser {
 	}
 	
 	@Test
-	public void verifyLoginBtnFunctionalityWithInvalidCredentials() throws InterruptedException
+	public void verifyLoginBtnFunctionalityWithInvalidCredentials() throws InterruptedException, IOException
 	{
 		ReadData readData = new ReadData("loginpage");
 		List<String>testdata=readData.getData(8);
 		Loginpage loginpage= new Loginpage(driver,"loginpage");
 		loginpage.enterUsername(testdata.get(0));
+		Screenshot.takePicture(driver);
+
 		loginpage.enterPassword(testdata.get(1));
+		Screenshot.takePicture(driver);
+
 		loginpage.clickonLoginbtn();
+		Screenshot.takePicture(driver);
+
 		String actualmsg=loginpage.getErrorMsg();
 		System.out.println(actualmsg);
 		//Thread.sleep(10000);
@@ -73,14 +89,20 @@ public class LoginpageTest extends Browser {
 	}
 	
 	@Test
-	public void verifyLoginBtnFunctionalityWithValidCredentials() throws InterruptedException
+	public void verifyLoginBtnFunctionalityWithValidCredentials() throws InterruptedException, IOException
 	{
 		ReadData readData = new ReadData("loginpage");
 		List<String>testdata=readData.getData(2);
 		Loginpage loginpage= new Loginpage(driver,"loginpage");
 		loginpage.enterUsername(testdata.get(1));
+		Screenshot.takePicture(driver);
+
 		loginpage.enterPassword(testdata.get(2));
+		Screenshot.takePicture(driver);
+
 		loginpage.clickonLoginbtn();
+		Screenshot.takePicture(driver);
+
 		
 		InventoryPage inventoryPage = new InventoryPage(driver,"inventory");
 		boolean status =inventoryPage.isProductTitleVisible();
