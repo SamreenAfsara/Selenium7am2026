@@ -1,5 +1,6 @@
 package com.swaglabs.utils;
 
+import io.qameta.allure.Allure;
 import io.qameta.allure.Attachment;
 import io.qameta.allure.Step;
 
@@ -11,16 +12,19 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.io.ByteArrayInputStream;
 
 public class Screenshot {
 
 	
 	
-	 @Step("Capture screenshot")
-	    @Attachment(value = "Step Screenshot", type = "image/png")
-	    public static byte[] takePicture(WebDriver driver) {
-	        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+	
+	 
+	 public static void takePicture(WebDriver driver) {
+	        byte[] screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+	        Allure.addAttachment("Screenshot", new ByteArrayInputStream(screenshot));
 	    }
+	 
     }
 	
 
